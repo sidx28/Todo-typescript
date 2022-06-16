@@ -2,7 +2,7 @@ export const TODO_STATUS_CHANGE = "todo status change";
 export const TODO_ADD = "todo add";
 export const COMPLETE_TODO_DELETED = "todo deleted";
 let count = 0;
-export const addTodo = (todoText: string) => ({
+export const todoAdd = (todoText: string) => ({
   type: TODO_ADD,
   payload: { id: ++count, title: todoText, done: false },
 });

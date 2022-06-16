@@ -1,9 +1,14 @@
-import Container from "./Container";
+import { Route, Routes } from "react-router-dom";
+import TodoPage from "./Components/TodoPage";
+import UserPage from "./Components/UserPage";
 
 function App() {
   return (
     <>
-      <Container />
+      <Routes>
+        <Route index element={<TodoPage />} />
+        <Route path="/user" element={<UserPage />} />
+      </Routes>
     </>
   );
 }

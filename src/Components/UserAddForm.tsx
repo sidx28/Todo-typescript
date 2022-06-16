@@ -5,9 +5,9 @@ import Input from "../BasicComponents/Input";
 import { connect } from "react-redux";
 import { todoAdd } from "../action/todos";
 
-type AddTodoFormProps = { onSubmit: (todoText: string) => void };
+type UserAddFormProps = { onSubmit: (todoText: string) => void };
 
-const AddTodoForm: FC<AddTodoFormProps> = ({ onSubmit }) => {
+const UserAddForm: FC<UserAddFormProps> = ({ onSubmit }) => {
   const [showTodoForm, updateShowTodoForm] = useState(false);
 
   const [inputValue, setInputValue] = useState("");
@@ -57,6 +57,6 @@ const AddTodoForm: FC<AddTodoFormProps> = ({ onSubmit }) => {
   );
 };
 
-AddTodoForm.defaultProps = {};
+UserAddForm.defaultProps = {};
 
-export default connect(undefined, { onSubmit: todoAdd })(memo(AddTodoForm));
+export default connect(undefined, { onSubmit: todoAdd })(memo(UserAddForm));

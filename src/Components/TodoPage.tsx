@@ -1,18 +1,18 @@
 import { FC, memo } from "react";
 import { useSelector } from "react-redux";
-import Button from "./BasicComponents/Button";
-import H1 from "./BasicComponents/H1";
-import H3 from "./BasicComponents/H3";
-import AddTodoForm from "./Components/AddTodoForm";
-import { CompleteTodoList, IncompleteTodoList } from "./Components/TodoList";
+import Button from "../BasicComponents/Button";
+import H1 from "../BasicComponents/H1";
+import H3 from "../BasicComponents/H3";
+import AddTodoForm from "./AddTodoForm";
+import { CompleteTodoList, IncompleteTodoList } from "./TodoList";
 import {
   completeTodoSelector,
   incompleteTodoSelector,
-} from "./selectors/todos";
-import { State } from "./store";
+} from "../selectors/todos";
+import { State } from "../store";
 type ContainerProps = {};
 
-const Container: FC<ContainerProps> = () => {
+const TodoPage: FC<ContainerProps> = () => {
   const completeTodoCount = useSelector((s: State) =>
     completeTodoSelector(s)
   ).length;
@@ -46,6 +46,6 @@ const Container: FC<ContainerProps> = () => {
   );
 };
 
-Container.defaultProps = {};
+TodoPage.defaultProps = {};
 
-export default memo(Container);
+export default memo(TodoPage);
