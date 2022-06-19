@@ -40,6 +40,7 @@ const AddTodoForm: FC<AddTodoFormProps> = ({ onSubmit }) => {
         <div className="flex flex-col items-start p-8 space-y-4 ">
           <h4>Create a Todo</h4>
           <Input
+            autoFocus
             type="text"
             value={inputValue}
             onChange={handleInputChange}
