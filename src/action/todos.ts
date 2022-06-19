@@ -1,6 +1,7 @@
 export const TODO_STATUS_CHANGE = "todo status change";
 export const TODO_ADD = "todo add";
-export const COMPLETE_TODO_DELETED = "todo deleted";
+export const COMPLETE_TODO_DELETED = "complete todo delete";
+export const TODO_DELETE = "todo delete";
 let count = 0;
 export const todoAdd = (todoText: string) => ({
   type: TODO_ADD,
@@ -14,4 +15,8 @@ export const todoStatusChange = (todoId: number, newStatus: boolean) => ({
 export const clearCompleteTodoList = (completeTodoId: number[]) => ({
   type: COMPLETE_TODO_DELETED,
   payload: { completeTodoId },
+});
+export const todoDelete = (id: number) => ({
+  type: TODO_DELETE,
+  payload: { id },
 });
