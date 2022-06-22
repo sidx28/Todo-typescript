@@ -3,13 +3,12 @@ import Button from "../BasicComponents/Button";
 import { GoPlus } from "react-icons/go";
 import Input from "../BasicComponents/Input";
 import { connect } from "react-redux";
-import { todoAdd } from "../action/todos";
+import { userAdd } from "../action/user";
 
-type UserAddFormProps = { onSubmit: (todoText: string) => void };
+type UserAddFormProps = { onSubmit: (name: string) => void };
 
 const UserAddForm: FC<UserAddFormProps> = ({ onSubmit }) => {
   const [showTodoForm, updateShowTodoForm] = useState(false);
-
   const [inputValue, setInputValue] = useState("");
 
   const handleShowTodoForm = () => {
@@ -33,12 +32,12 @@ const UserAddForm: FC<UserAddFormProps> = ({ onSubmit }) => {
           icon={<GoPlus />}
           onClick={handleShowTodoForm}
         >
-          Add A Todo
+          Add A user
         </Button>
       )}
       {showTodoForm && (
         <div className="flex flex-col items-start p-8 space-y-4 ">
-          <h4>Create a Todo</h4>
+          <h4>Create a user</h4>
           <Input
             type="text"
             value={inputValue}
@@ -59,4 +58,4 @@ const UserAddForm: FC<UserAddFormProps> = ({ onSubmit }) => {
 
 UserAddForm.defaultProps = {};
 
-export default connect(undefined, { onSubmit: todoAdd })(memo(UserAddForm));
+export default connect(undefined, { onSubmit: userAdd })(memo(UserAddForm));
