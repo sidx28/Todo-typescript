@@ -1,5 +1,6 @@
 import { FC, memo } from "react";
-import UserAddForm from "./UserAddForm";
+import { AddUserForm } from "./AddForm";
+import Header from "./Header";
 import UserList from "./UserList";
 
 type UserPageProps = {};
@@ -7,8 +8,11 @@ type UserPageProps = {};
 const UserPage: FC<UserPageProps> = () => {
   return (
     <>
-      <UserAddForm />
-      <UserList />
+      <Header />
+      <div className="p-5 ">
+        <UserList />
+        <AddUserForm />
+      </div>
     </>
   );
 };

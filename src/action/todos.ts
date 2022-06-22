@@ -3,9 +3,9 @@ export const TODO_ADD = "todo add";
 export const COMPLETE_TODO_DELETED = "complete todo delete";
 export const TODO_DELETE = "todo delete";
 let count = 0;
-export const todoAdd = (todoText: string) => ({
+export const todoAdd = (todoText: String, userName: string) => ({
   type: TODO_ADD,
-  payload: { id: ++count, title: todoText, done: false },
+  payload: { id: ++count, title: todoText, done: false, userName },
 });
 export const todoStatusChange = (todoId: number, newStatus: boolean) => ({
   type: TODO_STATUS_CHANGE,

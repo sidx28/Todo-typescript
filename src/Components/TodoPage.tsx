@@ -1,5 +1,5 @@
 import { FC, memo } from "react";
-import { connect, useSelector } from "react-redux";
+import { connect } from "react-redux";
 import Button from "../BasicComponents/Button";
 import H1 from "../BasicComponents/H1";
 import H3 from "../BasicComponents/H3";
@@ -10,6 +10,7 @@ import {
   incompleteTodoSelector,
 } from "../selectors/todos";
 import { State } from "../store";
+import { useParams } from "react-router-dom";
 type TodoPageProps = {
   completeTodosCount: number;
   incompleteTodosCount: number;
@@ -19,6 +20,7 @@ const TodoPage: FC<TodoPageProps> = ({
   completeTodosCount,
   incompleteTodosCount,
 }) => {
+  const userName = useParams().userName || "";
   return (
     <>
       <div className="p-5 space-y-4">
@@ -30,7 +32,7 @@ const TodoPage: FC<TodoPageProps> = ({
 
         <IncompleteTodoList />
         <div>
-          <AddTodoForm></AddTodoForm>
+          <AddTodoForm userName={userName}></AddTodoForm>
         </div>
         <div className="space-x-10 flex flex-row">
           <H3 className="text-2xl font-semibold">Things done</H3>

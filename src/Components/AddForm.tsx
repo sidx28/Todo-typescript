@@ -5,14 +5,19 @@ import Input from "../BasicComponents/Input";
 import { connect } from "react-redux";
 import { userAdd } from "../action/user";
 
-type UserAddFormProps = { onSubmit: (name: string) => void };
+type AddFormProps = {
+  type: string;
+  onSubmit: (text: string) => void;
+};
 
-const UserAddForm: FC<UserAddFormProps> = ({ onSubmit }) => {
-  const [showTodoForm, updateShowTodoForm] = useState(false);
+const AddForm: FC<AddFormProps> = ({ onSubmit, type }) => {
+  const [showForm, updateShowForm] = useState(false);
+
   const [inputValue, setInputValue] = useState("");
 
-  const handleShowTodoForm = () => {
-    updateShowTodoForm(!showTodoForm);
+  const handleShowForm = () => {
+    updateShowForm(!showForm);
+    setInputValue("");
   };
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -21,24 +26,21 @@ const UserAddForm: FC<UserAddFormProps> = ({ onSubmit }) => {
   const handleSubmit = () => {
     onSubmit(inputValue);
     setInputValue("");
-    handleShowTodoForm();
+    handleShowForm();
   };
 
   return (
     <form>
-      {!showTodoForm && (
-        <Button
-          theme="highlight"
-          icon={<GoPlus />}
-          onClick={handleShowTodoForm}
-        >
-          Add A user
+      {!showForm && (
+        <Button theme="highlight" icon={<GoPlus />} onClick={handleShowForm}>
+          Add A {type}
         </Button>
       )}
-      {showTodoForm && (
+      {showForm && (
         <div className="flex flex-col items-start p-8 space-y-4 ">
-          <h4>Create a user</h4>
+          <h4>Create a {type}</h4>
           <Input
+            autoFocus
             type="text"
             value={inputValue}
             onChange={handleInputChange}
@@ -46,7 +48,7 @@ const UserAddForm: FC<UserAddFormProps> = ({ onSubmit }) => {
           />
           <div className="flex flex-row space-x-2">
             <Button onClick={handleSubmit}>Save</Button>
-            <Button theme="secondary" onClick={handleShowTodoForm}>
+            <Button theme="secondary" onClick={handleShowForm}>
               Cancel
             </Button>
           </div>
@@ -56,6 +58,10 @@ const UserAddForm: FC<UserAddFormProps> = ({ onSubmit }) => {
   );
 };
 
-UserAddForm.defaultProps = {};
+AddForm.defaultProps = {};
 
-export default connect(undefined, { onSubmit: userAdd })(memo(UserAddForm));
+export default memo(AddForm);
+const userFormMapper = () => ({ type: "User" });
+export const AddUserForm = connect(userFormMapper, { onSubmit: userAdd })(
+  AddForm
+);
