@@ -1,7 +1,7 @@
 import { FC, memo } from "react";
 import { connect } from "react-redux";
 import User from "../models/user";
-import { userSelector } from "../selectors/user";
+import { usersListSelector } from "../selectors/user";
 import { State } from "../store";
 import UserTile from "./UserTile";
 
@@ -18,6 +18,6 @@ const UserList: FC<UserListProps> = ({ users }) => {
 };
 
 UserList.defaultProps = {};
-const mapStateToProps = (state: State) => ({ users: userSelector(state) });
+const mapStateToProps = (state: State) => ({ users: usersListSelector(state) });
 
 export default connect(mapStateToProps)(memo(UserList));

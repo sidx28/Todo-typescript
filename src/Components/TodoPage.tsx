@@ -30,7 +30,7 @@ const TodoPage: FC<TodoPageProps> = ({
           <span className="text-gray-500 ">No todo here!</span>
         )}
 
-        <IncompleteTodoList />
+        <IncompleteTodoList userName={userName} />
         <div>
           <AddTodoForm userName={userName}></AddTodoForm>
         </div>
@@ -41,7 +41,7 @@ const TodoPage: FC<TodoPageProps> = ({
         {!completeTodosCount && (
           <span className="text-gray-500">No todo here!</span>
         )}
-        <CompleteTodoList />
+        <CompleteTodoList userName={userName} />
       </div>
     </>
   );

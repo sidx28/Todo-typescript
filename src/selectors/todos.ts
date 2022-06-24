@@ -1,11 +1,11 @@
+import { values } from "lodash";
 import { createSelector } from "reselect";
 import { State } from "../store";
 
-export const todoStateSelector = (s: State) => s.todos;
+export const todoListSelector = (s: State) => values(s.todos);
 
-export const todoListSelector = createSelector(todoStateSelector, (todoState) =>
-  Object.keys(todoState).map((todoId) => todoState[todoId as any])
-);
+export const todoListSelectorByUser = (state: State, userName: string) =>
+  todoListSelector(state).filter((todo) => todo.user === userName);
 
 export const incompleteTodoSelector = createSelector(
   todoListSelector,
