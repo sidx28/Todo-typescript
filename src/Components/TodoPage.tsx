@@ -1,4 +1,4 @@
-import { FC, memo } from "react";
+import { FC, memo, useEffect } from "react";
 import { connect } from "react-redux";
 import Button from "../BasicComponents/Button";
 import H1 from "../BasicComponents/H1";
@@ -10,17 +10,24 @@ import {
   incompleteTodoSelector,
 } from "../selectors/todos";
 import { State } from "../store";
-import { useParams } from "react-router-dom";
+import { withRouter, WithRouterProps } from "../hoc/withRouter";
+import { addActiveUser } from "../action/user";
+
 type TodoPageProps = {
   completeTodosCount: number;
   incompleteTodosCount: number;
-};
+  addActiveUser: (id: number) => void;
+} & WithRouterProps;
 
 const TodoPage: FC<TodoPageProps> = ({
   completeTodosCount,
   incompleteTodosCount,
+  params,
+  addActiveUser,
 }) => {
-  const userName = useParams().userName || "";
+  useEffect(() => {
+    addActiveUser(+params.userId);
+  }, [params.userId]);
   return (
     <>
       <div className="p-5 space-y-4">
@@ -30,9 +37,9 @@ const TodoPage: FC<TodoPageProps> = ({
           <span className="text-gray-500 ">No todo here!</span>
         )}
 
-        <IncompleteTodoList userName={userName} />
+        <IncompleteTodoList />
         <div>
-          <AddTodoForm userName={userName}></AddTodoForm>
+          <AddTodoForm />
         </div>
         <div className="space-x-10 flex flex-row">
           <H3 className="text-2xl font-semibold">Things done</H3>
@@ -41,7 +48,7 @@ const TodoPage: FC<TodoPageProps> = ({
         {!completeTodosCount && (
           <span className="text-gray-500">No todo here!</span>
         )}
-        <CompleteTodoList userName={userName} />
+        <CompleteTodoList />
       </div>
     </>
   );
@@ -52,5 +59,7 @@ const mapStateToProps = (s: State) => ({
   completeTodosCount: completeTodoSelector(s).length,
   incompleteTodosCount: incompleteTodoSelector(s).length,
 });
-
-export default connect(mapStateToProps)(memo(TodoPage));
+const mapDispatchToProps = { addActiveUser: addActiveUser };
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(memo(TodoPage))
+);

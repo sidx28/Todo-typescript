@@ -6,9 +6,9 @@ export const COMPLETE_TODO_DELETED = "complete todo delete";
 export const TODO_DELETE = "todo delete";
 let count = getCachedData("todosCount") || 0;
 
-export const todoAdd = (todoText: String, userName: string) => ({
+export const todoAdd = (todoText: String, userId: number) => ({
   type: TODO_ADD,
-  payload: { id: ++count, title: todoText, done: false, userName },
+  payload: { id: ++count, title: todoText, done: false, userId },
 });
 export const todoStatusChange = (todoId: number, newStatus: boolean) => ({
   type: TODO_STATUS_CHANGE,

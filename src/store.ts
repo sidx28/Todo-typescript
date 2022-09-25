@@ -1,26 +1,16 @@
-import { createStore, Reducer } from "redux";
-import { initialTodoState, todoReducer, TodoState } from "./States/todos";
-import { initialUserState, userReducer, UserState } from "./States/user";
+import { combineReducers, createStore } from "redux";
+import { todoReducer } from "./reducers/todos";
+import { userReducer } from "./reducers/user";
 
-export type State = {
-  todos: TodoState;
-  user: UserState;
-};
-
-const initialState: State = {
-  todos: initialTodoState,
-  user: initialUserState,
-};
-const reducer: Reducer<State> = (state = initialState, action) => {
-  return {
-    todos: todoReducer(state.todos, action),
-    user: userReducer(state.user, action),
-  };
-};
+export const reducer = combineReducers({
+  todos: todoReducer,
+  user: userReducer,
+});
 
 const store = createStore(
   reducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
+export type State = ReturnType<typeof store.getState>;
 
 export default store;

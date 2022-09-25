@@ -7,7 +7,7 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<UserPage />} />
-        <Route path="/:userName/todos" element={<TodoPage />} />
+        <Route path="/:userId/todos" element={<TodoPage />} />
       </Routes>
     </>
   );

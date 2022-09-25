@@ -6,16 +6,16 @@ import { todoListSelectorByUser } from "../selectors/todos";
 type UserTileProps = { user: User };
 
 const UserTile: FC<UserTileProps> = ({ user }) => {
-  const { name } = user;
+  const { id, name } = user;
   const onClick = () => {
     todoListSelectorByUser;
   };
   return (
     <>
-      <Link to={`/${name}/todos`}>
+      <Link to={`/${id}/todos`}>
         <li className="list-none" onClick={onClick}>
           <div className="flex flex-row items-center p-1">
-            <p className={"ml-3 font-semibold"}>{name}</p>
+            <p className="ml-3 font-semibold">{name}</p>
           </div>
         </li>
       </Link>

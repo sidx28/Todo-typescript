@@ -4,15 +4,13 @@ import { GoPlus } from "react-icons/go";
 import Input from "../BasicComponents/Input";
 import { connect } from "react-redux";
 import { todoAdd } from "../action/todos";
-import { useParams } from "react-router-dom";
-
+import { withRouter, WithRouterProps } from "../hoc/withRouter";
 type AddTodoFormProps = {
   type: string;
-  userName: string;
-  onSubmit: (text: string, userName: string) => void;
-};
+  onSubmit: (text: string, userId: number) => void;
+} & WithRouterProps;
 
-const AddTodoForm: FC<AddTodoFormProps> = ({ onSubmit, type, userName }) => {
+const AddTodoForm: FC<AddTodoFormProps> = ({ onSubmit, type, params }) => {
   const [showForm, updateShowForm] = useState(false);
 
   const [inputValue, setInputValue] = useState("");
@@ -26,7 +24,7 @@ const AddTodoForm: FC<AddTodoFormProps> = ({ onSubmit, type, userName }) => {
     setInputValue(e.target.value);
   };
   const handleSubmit = () => {
-    onSubmit(inputValue, userName);
+    onSubmit(inputValue, +params.userId);
     setInputValue("");
     handleShowForm();
   };
@@ -64,6 +62,6 @@ AddTodoForm.defaultProps = {};
 
 const todoFormMapper = () => ({ type: "Todo" });
 
-export default connect(todoFormMapper, { onSubmit: todoAdd })(
-  memo(AddTodoForm)
+export default withRouter(
+  connect(todoFormMapper, { onSubmit: todoAdd })(memo(AddTodoForm))
 );
