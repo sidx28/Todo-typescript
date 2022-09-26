@@ -24,6 +24,7 @@ const TodoPage: FC<TodoPageProps> = ({
   completeTodosCount,
   incompleteTodosCount,
   params,
+  navigate,
   addActiveCategory,
 }) => {
   useEffect(() => {
@@ -31,7 +32,10 @@ const TodoPage: FC<TodoPageProps> = ({
   }, [params.categoryId]);
   return (
     <>
-      <Header />
+      <Header
+        showBackButton={true}
+        handleBackButtonClick={() => navigate("/")}
+      />
       <div className="p-5 space-y-4">
         <H1> Things to get done</H1>
         <div className="ml-5">

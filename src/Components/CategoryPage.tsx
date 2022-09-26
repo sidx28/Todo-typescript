@@ -8,7 +8,7 @@ type CategoryPageProps = {};
 const CategoryPage: FC<CategoryPageProps> = () => {
   return (
     <>
-      <Header />
+      <Header showBackButton={false} />
       <div className="p-5 ">
         <CategoryList />
         <AddCategoryForm />

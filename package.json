@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@types/lodash": "^4.14.182",
+    "@types/react-router-dom": "^5.3.3",
     "classnames": "^2.3.1",
     "git": "^0.1.5",
     "JASON": "^0.1.3",
