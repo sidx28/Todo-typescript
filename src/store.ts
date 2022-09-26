@@ -1,10 +1,10 @@
 import { combineReducers, createStore } from "redux";
 import { todoReducer } from "./reducers/todos";
-import { userReducer } from "./reducers/user";
+import { categoryReducer } from "./reducers/categories";
 
 export const reducer = combineReducers({
   todos: todoReducer,
-  user: userReducer,
+  category: categoryReducer,
 });
 
 const store = createStore(

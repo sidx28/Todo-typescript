@@ -3,7 +3,7 @@ import Button from "../BasicComponents/Button";
 import { GoPlus } from "react-icons/go";
 import Input from "../BasicComponents/Input";
 import { connect } from "react-redux";
-import { userAdd } from "../action/user";
+import { categoryAdd } from "../action/categories";
 
 type AddFormProps = {
   type: string;
@@ -61,7 +61,7 @@ const AddForm: FC<AddFormProps> = ({ onSubmit, type }) => {
 AddForm.defaultProps = {};
 
 export default memo(AddForm);
-const userFormMapper = () => ({ type: "User" });
-export const AddUserForm = connect(userFormMapper, { onSubmit: userAdd })(
+const categoryFormMapper = () => ({ type: "Category" });
+export const AddCategoryForm = connect(categoryFormMapper, { onSubmit: categoryAdd })(
   AddForm
 );

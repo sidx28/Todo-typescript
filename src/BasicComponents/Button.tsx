@@ -1,11 +1,18 @@
+import cn from "classnames";
 import { ButtonHTMLAttributes, FC, memo } from "react";
 
 type ButtonProps = {
-  theme?: "secondary" | "highlight";
+  theme?: "secondary" | "highlight" | "custom";
   icon?: JSX.Element;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
-const Button: FC<ButtonProps> = ({ theme, children, icon, ...rest }) => {
+const Button: FC<ButtonProps> = ({
+  className,
+  theme,
+  children,
+  icon,
+  ...rest
+}) => {
   let themeClass =
     "text-white bg-gray-500 border-transparent hover:bg-gray-600 rounded-md";
   if (theme === "secondary") {
@@ -15,14 +22,23 @@ const Button: FC<ButtonProps> = ({ theme, children, icon, ...rest }) => {
     themeClass =
       "rounded-full text-white bg-gray-500 border-transparent hover:bg-gray-600";
   }
+  if (theme === "custom") {
+    themeClass = "";
+  }
   return (
     <>
       <button
         {...rest}
-        className={
-          "inline-flex items-center px-3 py-2 text-sm font-medium leading-4 border shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 " +
-          themeClass
-        }
+        className={cn(
+          "",
+          {
+            "inline-flex items-center px-3 py-2 text-sm font-medium leading-4 border shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 ":
+              theme !== "custom",
+          },
+          { "py-2 inline-flex items-center ": theme === "custom" },
+          themeClass,
+          className
+        )}
       >
         {icon && <span className="mr-1">{icon}</span>}
         {children}

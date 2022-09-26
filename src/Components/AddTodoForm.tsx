@@ -7,7 +7,7 @@ import { todoAdd } from "../action/todos";
 import { withRouter, WithRouterProps } from "../hoc/withRouter";
 type AddTodoFormProps = {
   type: string;
-  onSubmit: (text: string, userId: number) => void;
+  onSubmit: (text: string, categoryId: number) => void;
 } & WithRouterProps;
 
 const AddTodoForm: FC<AddTodoFormProps> = ({ onSubmit, type, params }) => {
@@ -24,7 +24,7 @@ const AddTodoForm: FC<AddTodoFormProps> = ({ onSubmit, type, params }) => {
     setInputValue(e.target.value);
   };
   const handleSubmit = () => {
-    onSubmit(inputValue, +params.userId);
+    onSubmit(inputValue, +params.categoryId);
     setInputValue("");
     handleShowForm();
   };
@@ -37,7 +37,7 @@ const AddTodoForm: FC<AddTodoFormProps> = ({ onSubmit, type, params }) => {
         </Button>
       )}
       {showForm && (
-        <div className="flex flex-col items-start p-8 space-y-4 ">
+        <div className="flex flex-col items-start space-y-4 ">
           <h4>Create a {type}</h4>
           <Input
             autoFocus

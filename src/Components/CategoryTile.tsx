@@ -1,14 +1,14 @@
 import { FC, memo } from "react";
 import { Link } from "react-router-dom";
-import User from "../models/user";
-import { todoListSelectorByUser } from "../selectors/todos";
+import Category from "../models/category";
+import { todoListSelectorByCategory } from "../selectors/todos";
 
-type UserTileProps = { user: User };
+type CategoryTileProps = { category: Category };
 
-const UserTile: FC<UserTileProps> = ({ user }) => {
-  const { id, name } = user;
+const CategoryTile: FC<CategoryTileProps> = ({ category }) => {
+  const { id, name } = category;
   const onClick = () => {
-    todoListSelectorByUser;
+    todoListSelectorByCategory;
   };
   return (
     <>
@@ -23,6 +23,6 @@ const UserTile: FC<UserTileProps> = ({ user }) => {
   );
 };
 
-UserTile.defaultProps = {};
+CategoryTile.defaultProps = {};
 
-export default memo(UserTile);
+export default memo(CategoryTile);

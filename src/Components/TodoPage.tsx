@@ -11,44 +11,47 @@ import {
 } from "../selectors/todos";
 import { State } from "../store";
 import { withRouter, WithRouterProps } from "../hoc/withRouter";
-import { addActiveUser } from "../action/user";
+import { addActiveCategory } from "../action/categories";
+import Header from "./Header";
 
 type TodoPageProps = {
   completeTodosCount: number;
   incompleteTodosCount: number;
-  addActiveUser: (id: number) => void;
+  addActiveCategory: (id: number) => void;
 } & WithRouterProps;
 
 const TodoPage: FC<TodoPageProps> = ({
   completeTodosCount,
   incompleteTodosCount,
   params,
-  addActiveUser,
+  addActiveCategory,
 }) => {
   useEffect(() => {
-    addActiveUser(+params.userId);
-  }, [params.userId]);
+    addActiveCategory(+params.categoryId);
+  }, [params.categoryId]);
   return (
     <>
+      <Header />
       <div className="p-5 space-y-4">
         <H1> Things to get done</H1>
-        <H3>Things to do</H3>
-        {!incompleteTodosCount && (
-          <span className="text-gray-500 ">No todo here!</span>
-        )}
-
-        <IncompleteTodoList />
-        <div>
-          <AddTodoForm />
+        <div className="ml-5">
+          <H3>Things to do</H3>
+          {!incompleteTodosCount && (
+            <span className="text-gray-500 ml-5">No todo here!</span>
+          )}
+          <IncompleteTodoList />
+          <div className="my-5 ml-20">
+            <AddTodoForm />
+          </div>
+          <div className="space-x-10 flex flex-row">
+            <H3 className="text-2xl font-semibold">Things done</H3>
+            <Button theme="secondary">Clear All</Button>
+          </div>
+          {!completeTodosCount && (
+            <span className="text-gray-500">No todo here!</span>
+          )}
+          <CompleteTodoList />
         </div>
-        <div className="space-x-10 flex flex-row">
-          <H3 className="text-2xl font-semibold">Things done</H3>
-          <Button theme="secondary">Clear All</Button>
-        </div>
-        {!completeTodosCount && (
-          <span className="text-gray-500">No todo here!</span>
-        )}
-        <CompleteTodoList />
       </div>
     </>
   );
@@ -59,7 +62,7 @@ const mapStateToProps = (s: State) => ({
   completeTodosCount: completeTodoSelector(s).length,
   incompleteTodosCount: incompleteTodoSelector(s).length,
 });
-const mapDispatchToProps = { addActiveUser: addActiveUser };
+const mapDispatchToProps = { addActiveCategory: addActiveCategory };
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(memo(TodoPage))
 );

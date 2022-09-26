@@ -1,13 +1,13 @@
 import { Link, Route, Routes } from "react-router-dom";
 import TodoPage from "./Components/TodoPage";
-import UserPage from "./Components/UserPage";
+import CategoryPage from "./Components/CategoryPage";
 
 function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<UserPage />} />
-        <Route path="/:userId/todos" element={<TodoPage />} />
+        <Route path="/" element={<CategoryPage />} />
+        <Route path="/:categoryId/todos" element={<TodoPage />} />
       </Routes>
     </>
   );

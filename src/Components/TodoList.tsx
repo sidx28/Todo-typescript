@@ -10,7 +10,7 @@ import { State } from "../store";
 import TodoTile from "./TodoTile";
 
 type TodoListProps = {
-  // userName: string;
+  // categoryName: string;
   todos: Todo[];
   onStatusChange: (id: number, done: boolean) => void;
   onDelete: (id: number) => void;
@@ -20,7 +20,7 @@ const TodoList: FC<TodoListProps> = ({
   todos,
   onStatusChange,
   onDelete,
-  // userName,
+  // categoryName,
 }) => {
   return (
     <>

@@ -1,21 +1,21 @@
 import { values } from "lodash";
 import { createSelector } from "reselect";
 import { State } from "../store";
-import { activeUserSelector } from "./user";
+import { activeCategorySelector } from "./category";
 
 export const todoListSelector = (s: State) => values(s.todos);
 
-export const todoListSelectorByUser = createSelector(
-  activeUserSelector,
+export const todoListSelectorByCategory = createSelector(
+  activeCategorySelector,
   todoListSelector,
-  (activeUser, todos) => todos.filter((t) => t.userId === activeUser.id)
+  (activeCategory, todos) => todos.filter((t) => t.categoryId === activeCategory.id)
 );
 
 export const incompleteTodoSelector = createSelector(
-  todoListSelectorByUser,
+  todoListSelectorByCategory,
   (todos) => todos.filter((t) => !t.done)
 );
 export const completeTodoSelector = createSelector(
-  todoListSelectorByUser,
+  todoListSelectorByCategory,
   (todos) => todos.filter((t) => t.done)
 );
